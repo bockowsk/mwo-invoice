@@ -1,6 +1,7 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
@@ -130,4 +131,25 @@ public class InvoiceTest {
 		Assert.assertThat(invoice.getNumber(), Matchers.lessThan(invoice2.getNumber()));
 	}
 
+	@Test
+	public void testPrintIsThereAnInvoiceNumber() {
+		String printed = invoice.print();
+		String number=String.valueOf(invoice.getNumber());
+		Assert.assertThat(printed, Matchers.containsString(number));
+	}
+	
+	@Test
+	public void testPrintContainsProductName() {
+		invoice.addProduct(new OtherProduct("Oscypek", new BigDecimal("2.50")));
+		String printed=invoice.print();
+		Assert.assertThat(printed,Matchers.containsString("Oscypek"));
+	}
+	@Test
+	public void testPrintContainsQuantity() {
+		invoice.addProduct(new OtherProduct("Oscypek", new BigDecimal("2.50")));
+		invoice.addProduct(new OtherProduct("Oscypek Duzy", new BigDecimal("3.50")));
+		String printed=invoice.print();
+		Assert.assertThat(printed,Matchers.containsString(""));
+	}
+	
 }

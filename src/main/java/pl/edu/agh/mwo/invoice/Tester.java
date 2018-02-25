@@ -7,6 +7,5 @@ public class Tester {
 		System.out.println(Invoice.order_number);
 		Invoice faktura2=new Invoice();
 		System.out.println(Invoice.order_number);
-		
 	}
 }

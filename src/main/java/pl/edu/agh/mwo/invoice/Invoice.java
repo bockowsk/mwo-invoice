@@ -3,13 +3,18 @@ package pl.edu.agh.mwo.invoice;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static java.lang.System.out;
 
 import pl.edu.agh.mwo.invoice.product.Product;
+
 
 public class Invoice {
 	protected static int order_number;
 	static {order_number=0;};
 	private int invoice_number;
+	private String listToPrint="";
 	private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
 	public Invoice() {
@@ -54,5 +59,11 @@ public class Invoice {
 	public int getNumber() {
 		
 		return invoice_number;
+	}
+
+	public String print() {
+		//this.listToPrint=""+this.getNumber()+"\n";
+		listToPrint+=products.keySet().stream().map((parametr)->{return parametr.getName();}).collect(Collectors.toList());
+		return this.listToPrint;
 	}
 }
